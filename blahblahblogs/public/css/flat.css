@@ -1,0 +1,175 @@
+/****************************************/
+/*****comment stuff*****/
+/****************************************/
+
+/*****end comment stuff*****/
+
+html, body{
+  color: #000;
+  /*text-shadow: #000 0px 0px 1px;*/
+  -webkit-font-smoothing: antialiased;
+}
+
+a{
+  color:rgb(0,0,102);
+}
+
+div.clear{
+  clear:both;
+}
+
+/****************************************/
+/*****input stuff*****/
+/****************************************/
+input, textarea{
+  border:none;
+  color: #000;
+  /*text-shadow: #fff 0px 0px 1px;*/
+  -webkit-font-smoothing: antialiased;
+  background-color:rgba(100,100,100, 0.5);
+  width:90%;
+  padding:0px 5px;
+  margin:2px 0px;
+}
+
+button{
+  background-color:rgba(100,100,100, 0.8);
+  border:none;
+  color: #FFF;
+  /*text-shadow: #000 0px 0px 1px;*/
+  -webkit-font-smoothing: antialiased;
+}
+button:hover{
+  background-color:black;
+  color:#fff;
+}
+/*****end input stuff*****/
+
+/****************************************/
+/*****background-colro*****/
+/****************************************/
+  .bg-blue{
+    background-color: rgba(0,102,153, 0.8);
+  }
+  .bg-green{
+    background-color: rgba(0,153,51, 0.8);
+  }
+  .bg-red{
+    background-color: rgba(102,0,0, 0.8);
+  }
+  .bg-yellow{
+    background-color: rgba(204,204,0, 0.8);
+  }
+  .bg-grey{
+    background-color:rgba(200,200,200,0.8);
+  }
+  .bg-black{
+    background-color:rgba(0,0,0,0.8);
+  }
+  .bg-white{
+    background-color:rgba(255,255,255,0.4);
+  }
+  .bg-light-grey{
+    background-color:rgba(100,100,100,0.8);
+  }
+
+/****************************************/
+/*****container stuff*****/
+/****************************************/
+/*.contain contain-color*/
+.contain{
+  display:block;
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  padding:10px;
+  position:relative;
+}
+
+div.contain-left{
+  display:block;
+  width:49%;
+  float:left;
+  position: relative;
+}
+
+div.contain-right{
+  display:block;
+  width:49%;
+  float:right;
+  position: relative;
+
+}
+
+  /*headers*/
+  .header{
+    width:105%;
+    padding:10px;
+  }
+
+/*****end container stuff*****/
+
+/****************************************/
+/*****b0xx stuff*****/
+/****************************************/
+.box-left{
+  text-align:left;
+}
+.box-right{
+  text-align:right;
+}
+/*****end b0xx stuff*****/
+
+/****************************************/
+/*****table stuff*****/
+/****************************************/
+table{
+  width:100%;
+  /*border:solid 2px #aaa;*/
+  background-color:rgba(100,100,100,0.5);
+}
+tr:hover{
+  background-color:rgba(100,100,100, 0.8);
+  color:#fff;
+}
+tr{
+  border-bottom:solid 1px #aaa;
+}
+thead{
+  background-color:#111;
+  color:#fff;
+  padding:10px;
+}
+td, th{
+  padding:0px 5px;
+}
+/*****end table stuff*****/
+
+
+
+/****************************************/
+/*****misc stuff*****/
+/****************************************/
+.width-20{  width:20%;}
+.width-25{  width:25%;}
+.width-40{  width:40%;}
+.width-50{  width:50%;}
+.width-60{  width:60%;}
+.width-75{  width:75%;}
+.width-80{  width:80%;}
+.width-100{  width:100%;}
+.block{  display:block;}
+.float-left{  float:left;}
+.float-right{  float:right;}
+.text-right{  text-align:right;}
+.text-center{
+  text-align:center;
+}
+/*****end misc stuff*****/
+
+@media (max-width: 480px){
+  div.contain-left, div.contain-right{
+    width:100%;
+    clear:both;
+  }
+}
