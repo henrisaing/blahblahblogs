@@ -12,7 +12,7 @@ $(document).ready(function(){
   });
   
   // undarkens background
-  $('a.lightbox-close , button.lightbox-close').click(function(){
+  $('a.lightbox-close , button.lightbox-close, #fade').click(function(){
     $('#fade').css('display','none');
     $('#light').css('display','none');
   });

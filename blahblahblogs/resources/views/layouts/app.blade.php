@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Blah Blah Blogs') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -74,7 +75,18 @@
         @yield('content')
     </div>
 
+    <!-- lightbox popup div -->
+    <div id="light" class="white_content">
+        <div id="lightbox-content"></div> 
+        <div class="lb-close">
+            <button class="lightbox-close" type="button">close</button>
+        </div>
+    </div>
+    <div id="fade" class="black_overlay"></div>
+    <!-- lightbox popup div end -->
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>
