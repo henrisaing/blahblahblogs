@@ -7,7 +7,10 @@
 
   <input type="text" name="contact" placeholder="Contact Info" value="{{$blog->contact}}"> <br>
 
-  public <input type="checkbox" name="public" value="1" <?php if($blog->public){print('checked');} ?>>
+  <select name="public">
+    <option value="1" <?php if($blog->public){print('selected');} ?>>public</option>
+    <option value="0" <?php if($blog->public == false){print('selected');} ?>>private</option>
+  </select>
   
   <button type="submit" class="lb-close">Update Blog</button>
 </form>

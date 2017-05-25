@@ -19,7 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// blog routes
 Route::get('/blog/new', 'BlogController@new');
 Route::post('/blog/create', 'BlogController@create');
 Route::get('/blog/{name}/edit', 'BlogController@edit');
-Route::post('/blog/{name}/update', 'BlogController@update');
+Route::post('/blog/{blog}/update', 'BlogController@update');
+
+// post routes
+Route::get('/{name}', 'PostController@index');
+Route::get('/blog/{blog}/post/new', 'PostController@new');
+Route::post('/blog/{blog}/post/create', 'PostController@create');
+Route::get('/{name}/{title}', 'PostController@show');

@@ -7,7 +7,10 @@
 
   <input type="text" name="contact" placeholder="Contact Info"> <br>
 
-  public <input type="checkbox" name="public" value="1">
+  <select name="public">
+    <option value="1">public</option>
+    <option value="0">private</option>
+  </select>
   
   <button type="submit" class="lb-close">Create Blog</button>
 </form>

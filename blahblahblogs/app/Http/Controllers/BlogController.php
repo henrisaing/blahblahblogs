@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Blog;
+use App\AuthCheck;
 
 class BlogController extends Controller
 {
@@ -28,9 +29,10 @@ class BlogController extends Controller
     //   'contact' => $request->contact,
     // ]);
 
-    Auth::user()->blogs()->create($request->input());
+    $blog = Auth::user()->blogs()->create($request->input());
 
-    $view = redirect('/home');
+    // $view = redirect('/home');
+    $view = redirect('/'.$blog->name);
 
     return $view;
   }
@@ -43,10 +45,12 @@ class BlogController extends Controller
   }
 
   public function update(Blog $blog, Request $request){
-    if (Auth::ownsBlog($blog)):
-      $blog->update($request);
+    if(AuthCheck::ownsBlog($blog)):
+      $blog->update($request->input());
+      $view = redirect('/home');
+    else:
+      $view = view('errors.oops');
     endif;
-    $view = redirect('/home');
 
     return $view;
   }
