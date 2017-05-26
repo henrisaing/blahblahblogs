@@ -1,5 +1,15 @@
 @extends('layouts.app')
 @section('content')
+<h2>Create Post</h2>
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
   <form action="/blog/{{$blog->id}}/post/create" method="post">
     {{csrf_field()}}
     
@@ -7,7 +17,10 @@
     
     <textarea name="info" placeholder="Content"></textarea> <br>
 
-    public <input type="checkbox" name="public" value="1"> <br>
+    <select name="public">
+      <option value="1">public</option>
+      <option value="0">private</option>
+    </select>
 
     <button type="submit">Post</button>
     <a href="/{{$blog->name}}"><button type="button">Back</button></a>

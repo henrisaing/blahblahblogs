@@ -16,7 +16,11 @@ class BlogController extends Controller
   }
 
   public function new(){
-    $view = view('blogs.new');
+    if(Auth::check()):
+      $view = view('blogs.new');
+    else:
+      $view = view('errors.nsi');
+    endif;
 
     return $view;
   }
@@ -28,11 +32,21 @@ class BlogController extends Controller
     //   'info' => $request->info,
     //   'contact' => $request->contact,
     // ]);
+    
 
-    $blog = Auth::user()->blogs()->create($request->input());
+    if(Auth::check()):
+      $this->validate($request,[
+        'name' => 'required|unique:blogs,name'
+      ]);
+
+      $blog = Auth::user()->blogs()->create($request->input());
+      $view = redirect('/'.$blog->name);
+    else:
+      $view = view('errors.nsi');
+    endif;
 
     // $view = redirect('/home');
-    $view = redirect('/'.$blog->name);
+    
 
     return $view;
   }
