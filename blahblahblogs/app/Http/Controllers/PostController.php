@@ -44,7 +44,7 @@ class PostController extends Controller
         'title' => 'required|unique:posts,title'
       ]);
 
-      $post = $blog->posts()->create($request->input());
+      $post = $blog->posts()->create(clean($request->input()));
       $view = redirect('/'.$blog->name.'/'.$post->title);
     else:
       $view = view('errors.oops');
@@ -56,12 +56,15 @@ class PostController extends Controller
   public function show($name, $title){
     $blog = Blog::where('name', $name)->first();
     $post = $blog->posts()->where('title', $title)->first();
+    $comments = $post->comments()->get();
     $owns = AuthCheck::ownsBlog($blog);
+    
     if ($owns || ($blog->public && $post->public)):
       $view = view('posts.show', [
         'blog' => $blog,
         'post' => $post,
         'owns' => $owns,
+        'comments' => $comments,
       ]);
     else:
       $view = view('errors.oops');
@@ -90,12 +93,13 @@ class PostController extends Controller
     $blog = Blog::where('name', $name)->first();
     $post = $blog->posts()->where('title', $title)->first();
     $owns = AuthCheck::ownsBlog($blog);
+
     if ($owns):
       $this->validate($request,[
         'title' => 'required|unique:posts,title'
       ]);
-    
-      $post->update($request->input());
+
+      $post->update(clean($request->input()));
 
       $view = redirect('/'.$blog->name.'/'.$post->title);
     else:
