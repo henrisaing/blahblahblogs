@@ -9,11 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        <?php if(isset($blog)): ?>
-            {{str_replace('_',' ',$blog->name)}}
-        <?php else: ?>
-            {{ config('app.name', 'Blah Blah Blogs') }}
-        <?php endif; ?>
+      <?php if(isset($blog)): ?>
+        {{$blog->name}}
+      <?php endif; ?>
     </title>
 
     <!-- Styles -->

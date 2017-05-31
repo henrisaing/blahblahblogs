@@ -39,7 +39,14 @@ class BlogController extends Controller
         'name' => 'required|unique:blogs,name'
       ]);
 
-      $blog = Auth::user()->blogs()->create($request->input());
+      // $blog = Auth::user()->blogs()->create($request->input());
+      $blog = Auth::user()->blogs()->create([
+        'name' => str_replace(' ', '_', clean($request->name)),
+        'info' => $request->info,
+        'contact' => $request->contact,
+        'public' => $request->public,
+      ]);
+
       $view = redirect('/'.$blog->name);
     else:
       $view = view('errors.nsi');
@@ -60,7 +67,13 @@ class BlogController extends Controller
 
   public function update(Blog $blog, Request $request){
     if(AuthCheck::ownsBlog($blog)):
-      $blog->update($request->input());
+      // $blog->update($request->input());
+      $blog->update([
+        'name' => str_replace(' ', '_', clean($request->name)),
+        'info' => $request->info,
+        'contact' => $request->contact,
+        'public' => $request->public,
+      ]);
       $view = redirect('/home');
     else:
       $view = view('errors.oops');

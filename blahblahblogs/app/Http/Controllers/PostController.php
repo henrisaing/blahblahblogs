@@ -40,11 +40,15 @@ class PostController extends Controller
 
   public function create(Blog $blog, Request $request){
     if(AuthCheck::ownsBlog($blog)):
-      $this->validate($request,[
-        'title' => 'required|unique:posts,title'
+
+      // $post = $blog->posts()->create(clean($request->input()));
+
+      $post = $blog->posts()->create([
+        'title' => str_replace(' ', '_', clean($request->title)),
+        'info' => clean($request->info),
+        'public' => $request->public,
       ]);
 
-      $post = $blog->posts()->create(clean($request->input()));
       $view = redirect('/'.$blog->name.'/'.$post->title);
     else:
       $view = view('errors.oops');
@@ -58,7 +62,7 @@ class PostController extends Controller
     $post = $blog->posts()->where('title', $title)->first();
     $comments = $post->comments()->get();
     $owns = AuthCheck::ownsBlog($blog);
-    
+
     if ($owns || ($blog->public && $post->public)):
       $view = view('posts.show', [
         'blog' => $blog,
@@ -89,17 +93,19 @@ class PostController extends Controller
     return $view;
   }
 
-  public function update($name, $title, Request $request){
-    $blog = Blog::where('name', $name)->first();
-    $post = $blog->posts()->where('title', $title)->first();
+  public function update(Blog $blog, Post $post, Request $request){
+    // $blog = Blog::where('name', $name)->first();
+    // $post = $blog->posts()->where('title', $title)->first();
     $owns = AuthCheck::ownsBlog($blog);
 
     if ($owns):
-      $this->validate($request,[
-        'title' => 'required|unique:posts,title'
-      ]);
 
-      $post->update(clean($request->input()));
+      // $post->update(clean($request->input()));
+      $post->update([
+        'title' => str_replace(' ', '_', clean($request->title)),
+        'info' => clean($request->info),
+        'public' => $request->public,
+      ]);
 
       $view = redirect('/'.$blog->name.'/'.$post->title);
     else:
