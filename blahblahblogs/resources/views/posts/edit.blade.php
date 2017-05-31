@@ -13,7 +13,7 @@
   <form action="/{{$blog->id}}/{{$post->id}}/update" method="post">
     {{csrf_field()}}
     
-    <input type="text" name="title" placeholder="Post Title" required value="{{$post->title}}"> <br>
+    <input type="text" name="title" placeholder="Post Title" required value="{{str_replace('-',' ',$post->title)}}"> <br>
     
     <textarea name="info" placeholder="Content">{{$post->info}}</textarea> <br>
 

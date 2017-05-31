@@ -10,7 +10,7 @@
 
     <title>
       <?php if(isset($blog)): ?>
-        {{$blog->name}}
+        {{str_replace('-',' ',$blog->name)}}
       <?php endif; ?>
     </title>
 

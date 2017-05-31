@@ -3,7 +3,7 @@
 
   <input type="text" name="name" placeholder="Blog Name" value="{{$blog->name}}" required> <br>
 
-  <textarea name="info" placeholder="Blog Description/Info">{{$blog->info}}</textarea> <br>
+  <textarea name="info" placeholder="Blog Description/Info">{{str_replace('-',' ',$blog->info)}}</textarea> <br>
 
   <input type="text" name="contact" placeholder="Contact Info" value="{{$blog->contact}}"> <br>
 

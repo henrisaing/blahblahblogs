@@ -20,7 +20,7 @@
 </h4>
 
 <?php foreach ($blogs as $blog): ?>
-  <a href="/{!!$blog->name!!}">{!! str_replace('_', ' ',$blog->name) !!}</a> <a func="/blog/{{$blog->name}}/edit" class="lightbox-open">[edit]</a> <br>
+  <a href="/{!!$blog->name!!}">{!! str_replace('-', ' ',$blog->name) !!}</a> <a func="/blog/{{$blog->name}}/edit" class="lightbox-open">[edit]</a> <br>
 <?php endforeach ?>
 
 <h4>Followed Blogs</h4>

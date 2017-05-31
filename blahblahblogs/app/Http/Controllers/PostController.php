@@ -44,7 +44,7 @@ class PostController extends Controller
       // $post = $blog->posts()->create(clean($request->input()));
 
       $post = $blog->posts()->create([
-        'title' => str_replace(' ', '_', clean($request->title)),
+        'title' => str_replace(' ', '-', clean($request->title)),
         'info' => clean($request->info),
         'public' => $request->public,
       ]);
@@ -60,7 +60,7 @@ class PostController extends Controller
   public function show($name, $title){
     $blog = Blog::where('name', $name)->first();
     $post = $blog->posts()->where('title', $title)->first();
-    $comments = $post->comments()->get();
+    $comments = $post->comments()->get()->reverse();
     $owns = AuthCheck::ownsBlog($blog);
 
     if ($owns || ($blog->public && $post->public)):
@@ -102,7 +102,7 @@ class PostController extends Controller
 
       // $post->update(clean($request->input()));
       $post->update([
-        'title' => str_replace(' ', '_', clean($request->title)),
+        'title' => str_replace(' ', '-', clean($request->title)),
         'info' => clean($request->info),
         'public' => $request->public,
       ]);
@@ -113,5 +113,10 @@ class PostController extends Controller
     endif;
 
     return $view;
+  }
+
+  public function delete(){
+    //TODO
+    return 1;
   }
 }

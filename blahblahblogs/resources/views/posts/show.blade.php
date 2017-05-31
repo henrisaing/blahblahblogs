@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<h2>{!!str_replace('_', ' ',$post->title)!!}</h2>
+<h2>{!!str_replace('-', ' ',$post->title)!!}</h2>
 
 <p>{!! $post->info !!}</p>
 <p>last updated: {{$post->updated_at}}</p>
@@ -15,6 +15,7 @@
 </form>
 <?php foreach ($comments as $comment): ?>
   <h4>{{$comment->name}}</h4>
+  {{$comment->created_at}}
   <p>{{$comment->info}}</p>
 <?php endforeach ?>
 

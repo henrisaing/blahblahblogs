@@ -41,7 +41,7 @@ class BlogController extends Controller
 
       // $blog = Auth::user()->blogs()->create($request->input());
       $blog = Auth::user()->blogs()->create([
-        'name' => str_replace(' ', '_', clean($request->name)),
+        'name' => str_replace(' ', '-', clean($request->name)),
         'info' => $request->info,
         'contact' => $request->contact,
         'public' => $request->public,
@@ -69,7 +69,7 @@ class BlogController extends Controller
     if(AuthCheck::ownsBlog($blog)):
       // $blog->update($request->input());
       $blog->update([
-        'name' => str_replace(' ', '_', clean($request->name)),
+        'name' => str_replace(' ', '-', clean($request->name)),
         'info' => $request->info,
         'contact' => $request->contact,
         'public' => $request->public,

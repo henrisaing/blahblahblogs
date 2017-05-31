@@ -10,7 +10,7 @@
 
     <title>
         <?php if(isset($blog)): ?>
-            {{str_replace('_',' ',$blog->name)}}
+            {{str_replace('-',' ',$blog->name)}}
         <?php else: ?>
             {{ config('app.name', 'Blah Blah Blogs') }}
         <?php endif; ?>

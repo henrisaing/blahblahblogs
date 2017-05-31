@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h2>{!! str_replace('_', ' ',$blog->name) !!}</h2>
+<h2>{!! str_replace('-', ' ',$blog->name) !!}</h2>
 <?php if ($owner): ?>
   <a href="/blog/{{$blog->id}}/post/new">[new post]</a>
 <?php endif ?>
@@ -9,7 +9,7 @@
   <?php if ($owner || $post->public): ?>
     <h4>
       <a href="/{{$blog->name}}/{{$post->title}}">
-        {!! str_replace('_', ' ',$post->title) !!}
+        {!! str_replace('-', ' ',$post->title) !!}
       </a>
 
       <?php if ($owner): ?>
