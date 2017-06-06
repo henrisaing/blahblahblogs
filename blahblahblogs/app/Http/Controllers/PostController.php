@@ -18,6 +18,7 @@ class PostController extends Controller
 
     $view = view('posts.index', [
       'blog' => $blog,
+      'blogSet' => $blog,
       'posts' => $posts,
       'owner' => $owner,
     ]);
@@ -29,6 +30,7 @@ class PostController extends Controller
     if(AuthCheck::ownsBlog($blog)):
       $view = view('posts.new', [
         'blog' => $blog,
+        'blogSet' => $blog,
       ]);
     else:
       $view = view('errors.oops');
@@ -66,6 +68,27 @@ class PostController extends Controller
     if ($owns || ($blog->public && $post->public)):
       $view = view('posts.show', [
         'blog' => $blog,
+        'blogSet' => $blog,
+        'post' => $post,
+        'owns' => $owns,
+        'comments' => $comments,
+      ]);
+    else:
+      $view = view('errors.oops');
+    endif;
+
+    return $view;
+  }
+  public function test($name, $title){
+    $blog = Blog::where('name', $name)->first();
+    $post = $blog->posts()->where('title', $title)->first();
+    $comments = $post->comments()->get()->reverse();
+    $owns = AuthCheck::ownsBlog($blog);
+
+    if ($owns || ($blog->public && $post->public)):
+      $view = view('posts.test', [
+        'blog' => $blog,
+        'blogSet' => $blog,
         'post' => $post,
         'owns' => $owns,
         'comments' => $comments,
@@ -84,6 +107,7 @@ class PostController extends Controller
     if ($owns):
       $view = view('posts.edit', [
         'blog' => $blog,
+        'blogSet' => $blog,
         'post' => $post,
       ]);
     else:

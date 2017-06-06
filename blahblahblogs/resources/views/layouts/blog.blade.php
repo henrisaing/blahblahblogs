@@ -1,96 +1,79 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>
-      <?php if(isset($blog)): ?>
-        {{str_replace('-',' ',$blog->name)}}
-      <?php endif; ?>
-    </title>
+  <title>
+    <?php if(isset($blogSet)): ?>
+      {{str_replace('-',' ',$blog->name)}}
+    <?php else: ?>
+      {{ config('app.name', 'Blah Blah Blogs') }}
+    <?php endif; ?>
+  </title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+  <!-- Styles -->
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+  <div id="app">
+    <nav id="nav-bar-top">
+      <ul>
+        <li>
+          <a href="/{{$blog->name}}">
+            {{str_replace('-',' ',$blog->name)}}
+          </a>
+        </li>
+        <li>
+          <a href="/home">
+            Home
+          </a>
+        </li>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+        @if (Auth::guest())
+          <li class="float-right"><a href="{{ route('login') }}">Login</a></li>
+          <li class="float-right"><a href="{{ route('register') }}">Register</a></li>
+        @else
+          <li class="float-right"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+          <li class="float-right"><a href="/home">Welcome {{ Auth::user()->name }}!</a></li>
+        @endif
+      </ul>
+    </nav>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
+    <?php if(isset($blogSet)): ?>
+    <div id="side-nav">
+      <ul>
+      <?php foreach ($blogSet->posts()->get()->reverse() as $post): ?>
+        <li>
+          <a href="/{{$blogSet->name}}/{{$post->title}}">{{$post->title}}</a>
+        </li>
+      <?php endforeach ?>
+      </ul>
     </div>
+  <?php endif; ?>
+      <div id="contain">
+      @yield('content')
+      </div>
+  </div>
 
-    <!-- lightbox popup div -->
-    <div id="light" class="white_content">
-        <div id="lightbox-content"></div> 
-        <div class="lb-close">
-            <button class="lightbox-close" type="button">close</button>
-        </div>
+  <!-- lightbox popup div -->
+  <div id="light" class="white_content">
+    <div id="lightbox-content"></div> 
+    <div class="lb-close">
+      <button class="lightbox-close" type="button">close</button>
     </div>
-    <div id="fade" class="black_overlay"></div>
-    <!-- lightbox popup div end -->
-    
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+  </div>
+  <div id="fade" class="black_overlay"></div>
+  <!-- lightbox popup div end -->
+  
+  <!-- Scripts -->
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

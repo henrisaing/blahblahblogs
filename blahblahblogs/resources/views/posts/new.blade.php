@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blog')
 @section('content')
 <h2>Create Post</h2>
 @if (count($errors) > 0)

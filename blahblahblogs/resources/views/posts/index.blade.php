@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blog')
 @section('content')
 <h2>{!! str_replace('-', ' ',$blog->name) !!}</h2>
 <?php if ($owner): ?>

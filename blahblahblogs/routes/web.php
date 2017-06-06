@@ -30,6 +30,7 @@ Route::get('/{name}', 'PostController@index');
 Route::get('/blog/{blog}/post/new', 'PostController@new');
 Route::post('/blog/{blog}/post/create', 'PostController@create');
 Route::get('/{name}/{title}', 'PostController@show');
+Route::get('/{name}/{title}/test', 'PostController@test');
 Route::get('/{name}/{title}/edit', 'PostController@edit');
 Route::post('/{blog}/{post}/update', 'PostController@update');
 
