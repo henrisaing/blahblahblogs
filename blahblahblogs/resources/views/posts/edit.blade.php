@@ -13,9 +13,9 @@
   <form action="/{{$blog->id}}/{{$post->id}}/update" method="post">
     {{csrf_field()}}
     
-    <input type="text" name="title" placeholder="Post Title" required value="{{str_replace('-',' ',$post->title)}}"> <br>
+    <input class="post-input" type="text" name="title" placeholder="Post Title" required value="{{str_replace('-',' ',$post->title)}}"> <br>
     
-    <textarea name="info" placeholder="Content">{{$post->info}}</textarea> <br>
+    <textarea class="post-input" name="info" placeholder="Content">{{$post->info}}</textarea> <br>
 
     <select name="public">
       <option value="1" <?php if($post->public){print('selected');} ?>>public</option>

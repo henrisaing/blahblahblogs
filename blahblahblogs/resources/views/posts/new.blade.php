@@ -13,9 +13,9 @@
   <form action="/blog/{{$blog->id}}/post/create" method="post">
     {{csrf_field()}}
     
-    <input type="text" name="title" placeholder="Post Title" required> <br>
+    <input class="post-input" type="text" name="title" placeholder="Post Title" required> <br>
     
-    <textarea name="info" placeholder="Content"></textarea> <br>
+    <textarea class="post-input" name="info" placeholder="Content"></textarea> <br>
 
     <select name="public">
       <option value="1">public</option>

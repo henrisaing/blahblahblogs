@@ -24,11 +24,13 @@
   <div id="app">
     <nav id="nav-bar-top">
       <ul>
-        <li>
+        <?php if(isset($blogSet)): ?>
+          <li>
           <a href="/{{$blog->name}}">
             {{str_replace('-',' ',$blog->name)}}
           </a>
-        </li>
+          </li>
+        <?php endif; ?>
         <li>
           <a href="/home">
             Home
